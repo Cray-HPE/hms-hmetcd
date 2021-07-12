@@ -12,13 +12,19 @@ pipeline {
 
     environment {
         NAME = "hms-hmetcd"
-        DESCRIPTION = "Cray ETCD Client Wrapper"
+        DESCRIPTION = "Cray HMS hmetcd code."
         IS_STABLE = getBuildIsStable()
         VERSION = getDockerBuildVersion(isStable: env.IS_STABLE)
         DOCKER_ARGS = getDockerBuildArgs(name: env.NAME, description: env.DESCRIPTION)
     }
 
     stages {
+        stage("Build") {
+            steps {
+                sh "make image"
+            }
+        }
+
         stage("Run Unit Tests") {
             steps {
                 sh "make unittest"
@@ -28,12 +34,6 @@ pipeline {
         stage("Run Coverage Tests") {
             steps {
                 sh "make coverage"
-            }
-        }
-        
-        stage("Build") {
-            steps {
-                sh "make image"
             }
         }
 
