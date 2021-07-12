@@ -30,7 +30,7 @@ pipeline {
                 sh "make unittest"
             }
         }
-        
+
         stage("Run Coverage Tests") {
             steps {
                 sh "make coverage"
