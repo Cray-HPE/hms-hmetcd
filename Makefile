@@ -12,6 +12,3 @@ unittest:
 coverage:
 	./runCoverage.sh
 
-buildbase:
-	docker build -t cray/hms-hmetcd-build-base -f Dockerfile.build-base .
-
